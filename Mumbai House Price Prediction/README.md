@@ -11,7 +11,7 @@ This machine learning project aims to predict house prices in Mumbai using a dat
 - [Acknowledgements](#Acknowledgements)
 - [Installation](#Installation)
 - [Usage](#Usage)
-- [Model Training](#Model_Training)
+- [Model Training](#ModelTraining)
 - [Evaluation](#Evaluation)
 - [License](#License)
 - [Contact](#Contact)
