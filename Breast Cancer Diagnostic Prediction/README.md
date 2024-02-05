@@ -1,7 +1,7 @@
 
-# Mumbai House Price Prediction
+# Breast Cancer Diagnostic Prediction
 
-This machine learning project aims to predict house prices in Mumbai using a dataset obtained from Kaggle. The project employs a Linear Regression model to analyze various features and make accurate predictions regarding property prices in different areas of Mumbai.
+Welcome to the Medical Diagnosis project! This project aims to develop a machine learning model to assist in the diagnosis of breast cancer based on patient data and relevant features.
 
 
 ## Table Of Content
@@ -17,15 +17,17 @@ This machine learning project aims to predict house prices in Mumbai using a dat
 - [Contact](#Contact)
 ## Dataset
 
-The dataset used for this project is sourced from Kaggle and contains detailed information about houses in Mumbai, including various features such as area size, number of bedrooms, location, etc. The dataset is available [here](https://www.kaggle.com/datasets/dravidvaishnav/mumbai-house-prices).
+The dataset used for this project is sourced from Kaggle and contains detailed information about The breast cancer diagnostic used in this project contains features computed from a digitized image of a fine needle aspirate (FNA) of a breast mass. The dataset is available [here](https://www.kaggle.com/datasets/uciml/breast-cancer-wisconsin-data).
+
 ## Features
 
-- Linear Regression Model: Utilizes a linear regression algorithm for predicting house prices.
-- Interactive Visualization: Visualizes prediction results through interactive plots.
-- Data Preprocessing: Includes preprocessing steps such as handling missing values and encoding categorical features.
+- Data-driven Diagnosis: Utilizes machine learning algorithms to predict breast cancer diagnosis based on patient data.
+- Interactive Visualization: Visualizes model predictions and evaluation results through interactive plots for enhanced interpretation.
+- Data Preprocessing: Includes preprocessing steps such as handling missing values, encoding categorical features, and scaling numerical features to ensure data quality and model performance.
+  
 ## Acknowledgements
 
- - The dataset used in this project was sourced from [Kaggle](https://www.kaggle.com/datasets/dravidvaishnav/mumbai-house-prices).
+ - The dataset used in this project was sourced from [Kaggle](https://www.kaggle.com/datasets/uciml/breast-cancer-wisconsin-data).
  - The project relies on the [scikit-learn](https://scikit-learn.org/) library for machine learning functionalities.
 
 
@@ -37,9 +39,7 @@ To run this project locally, follow these steps:
 
 
 ```bash
-git clone https://github.com/MathavanPandi/Machine-Learning/tree/84528ea95bd71ea6298072e9dd836b59e7b79ab2/Mumbai%20House%20Price%20Prediction
-cd mumbai-house-price-prediction
-
+git clone https://github.com/MathavanPandi/Machine-Learning-projects/tree/main/Breast%20Cancer%20Diagnostic%20Prediction
 
 ```
 
@@ -62,18 +62,18 @@ python main.py
 ```bash
 # Sample code snippet for model training
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LogisticRegression
 
 # Load the dataset
-data = pd.read_csv('mumbai_house_prices.csv')
+data = pd.read_csv('data.csv')
 
 # Preprocess the data (handle missing values, encode categorical features, etc.)
 
 # Split the data into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(features, target, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=40)
 
 # Initialize the Linear Regression model
-model = LinearRegression()
+model = LogisticRegression()
 
 # Train the model
 model.fit(X_train, y_train)
@@ -85,14 +85,27 @@ model.fit(X_train, y_train)
 
 ```bash
 # Sample code snippet for model evaluation
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import accuracy_score, classification_report
+y_pred = model.predict(X_train)
+train_acc = accuracy_score(y_train, y_pred)
+print("Training Accuracy:", train_acc)
+
+y_pred = model.predict(X_test)
+test_acc = accuracy_score(y_test, y_pred)
+print("Testing Accuracy:", test_acc)
 
 # Make predictions on the test set
-y_pred = model.predict(X_test)
+svm = SVC()
+svm.fit(X_train,y_train)
+prediction = svm.predict(X_test)
+print(accuracy_score(y_test,prediction))
+print(classification_report(y_test, prediction))
+print(confusion_matrix(y_test,prediction))
 
-# Calculate the Mean Squared Error
-mse = mean_squared_error(y_test, y_pred)
-print(f'Mean Squared Error: {mse}')
+# Model Interpretation (Coefficients)
+coefficients = pd.DataFrame(model.coef_[0], index=X.columns, columns=['Coefficient'])
+print("Model Coefficients:")
+print(coefficients)
 
 ```
 
